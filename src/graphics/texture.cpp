@@ -3,6 +3,27 @@
 #include <stdexcept>
 
 namespace terminal_fps::graphics {
+    Texture::Texture(uint16_t width, uint16_t height) {
+        m_width = width;
+        m_height = height;
+        if (m_width * m_height == 0) {
+            m_pixels = nullptr;
+        } else {
+            m_pixels =
+                static_cast<Color*>(calloc(m_width * m_height, sizeof(Color)));
+            if (m_pixels == nullptr) {
+                throw std::runtime_error("Failed to allocate memory");
+            }
+        }
+    }
+
+    Texture::~Texture() {
+        if (m_pixels != nullptr) {
+            free(m_pixels);
+            m_pixels = nullptr;
+        }
+    }
+
     uint16_t Texture::GetWidth() const {
         return m_width;
     }
