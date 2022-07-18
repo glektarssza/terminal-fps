@@ -12,7 +12,7 @@ endif()
 
 set(TERMINAL_FPS_SOURCES
     "./src/main.cpp" "./src/graphics/color.cpp" "./src/graphics/pixel.cpp"
-    "./src/graphics/texture.cpp")
+    "./src/graphics/texture.cpp" "./src/graphics/framebuffer.cpp")
 set(TERMINAL_FPS_INCLUDE_DIRS "./include/")
 
 add_executable(terminal-fps ${TERMINAL_FPS_SOURCES})
