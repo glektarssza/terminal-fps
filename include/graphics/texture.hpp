@@ -73,6 +73,8 @@ namespace terminal_fps::graphics {
 
         /**
          * Get the number of pixels in the texture.
+         *
+         * @returns The number of pixels in the texture.
          */
         uint32_t GetPixelCount() const;
 
