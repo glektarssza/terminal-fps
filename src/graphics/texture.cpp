@@ -14,6 +14,9 @@ namespace terminal_fps::graphics {
             if (m_pixels == nullptr) {
                 throw std::runtime_error("Failed to allocate memory");
             }
+            for (uint32_t i = 0; i < m_width * m_height; ++i) {
+                m_pixels[i] = Color::getDefault();
+            }
         }
     }
 
