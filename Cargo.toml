@@ -1,0 +1,15 @@
+[package]
+name = "terminal-fps"
+description = "A simple first-person shooter that runs in your terminal."
+version = "0.0.0"
+license = "MIT"
+edition = "2021"
+authors = ["G'lek Tarssza <glek@glektarssza.com>"]
+categories = ["games"]
+keywords = ["game", "terminal", "first-person", "ray", "casting"]
+readme = "README.md"
+homepage = "https://github.com/glektarssza/terminal-fps"
+repository = "https://github.com/glektarssza/terminal-fps"
+
+[dependencies]
+libc = "0.2"
