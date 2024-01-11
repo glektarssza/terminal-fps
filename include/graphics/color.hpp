@@ -10,6 +10,9 @@
 //-- C Standard Library
 #include <cstdint>
 
+//-- Standard Library
+#include <string>
+
 namespace terminal_fps::graphics {
     /**
      * A simple three-component color.
@@ -36,5 +39,21 @@ namespace terminal_fps::graphics {
          * The blue component.
          */
         uint8_t blue;
+
+        /**
+         * Convert this instance to an ANSI control sequence for setting the
+         * background color.
+         *
+         * @returns An ANSI control sequence for setting the background color.
+         */
+        std::string toANSIBackground();
+
+        /**
+         * Convert this instance to an ANSI control sequence for setting the
+         * foreground color.
+         *
+         * @returns An ANSI control sequence for setting the foreground color.
+         */
+        std::string toANSIForeground();
     };
 } // namespace terminal_fps::graphics
