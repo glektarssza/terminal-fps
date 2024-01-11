@@ -20,14 +20,14 @@ namespace terminal_fps::graphics {
         return {0, 0, 0};
     }
 
-    std::string Color::toANSIBackground() {
+    std::string Color::toANSIBackground() const {
         auto ostream = std::ostringstream();
         ostream << "\x1B[48;2;" << this->red << ";" << this->green << ";"
                 << this->blue << "m";
         return ostream.str();
     }
 
-    std::string Color::toANSIForeground() {
+    std::string Color::toANSIForeground() const {
         auto ostream = std::ostringstream();
         ostream << "\x1B[38;2;" << this->red << ";" << this->green << ";"
                 << this->blue << "m";

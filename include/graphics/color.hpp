@@ -53,7 +53,7 @@ namespace terminal_fps::graphics {
          *
          * @returns An ANSI control sequence for setting the background color.
          */
-        std::string toANSIBackground();
+        std::string toANSIBackground() const;
 
         /**
          * Convert this instance to an ANSI control sequence for setting the
@@ -61,6 +61,6 @@ namespace terminal_fps::graphics {
          *
          * @returns An ANSI control sequence for setting the foreground color.
          */
-        std::string toANSIForeground();
+        std::string toANSIForeground() const;
     };
 } // namespace terminal_fps::graphics
