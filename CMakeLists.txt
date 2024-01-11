@@ -11,7 +11,7 @@ else()
     set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules/")
 endif()
 
-set(TERMINAL_FPS_SOURCES "./src/main.cpp" "./src/graphics/color.cpp")
+set(TERMINAL_FPS_SOURCES "./src/main.cpp" "./src/graphics/color.cpp" "./src/graphics/pixel.cpp")
 set(TERMINAL_FPS_INCLUDE_DIRS "./include/")
 set(TERMINAL_FPS_DEFINES "PROJECT_NAME=\"${PROJECT_NAME}\"" "PROJECT_VERSION=\"${PROJECT_VERSION}\"")
 
