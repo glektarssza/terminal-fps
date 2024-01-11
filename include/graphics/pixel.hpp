@@ -25,7 +25,12 @@ namespace terminal_fps::graphics {
         /**
          * The color of the pixel.
          */
-        Color color;
+        Color foregroundColor;
+
+        /**
+         * The background color of the pixel.
+         */
+        Color backgroundColor;
 
         /**
          * The symbol that represents the pixel.

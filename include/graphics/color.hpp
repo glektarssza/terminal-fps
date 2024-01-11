@@ -19,11 +19,18 @@ namespace terminal_fps::graphics {
      */
     struct Color {
         /**
-         * Get the default value.
+         * Get the default background value.
          *
          * @returns The default value.
          */
-        static Color getDefault();
+        static Color getDefaultBackground();
+
+        /**
+         * Get the default foreground value.
+         *
+         * @returns The default value.
+         */
+        static Color getDefaultForeground();
 
         /**
          * The red component.

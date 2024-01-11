@@ -12,7 +12,11 @@
 #include <sstream>
 
 namespace terminal_fps::graphics {
-    Color Color::getDefault() {
+    Color Color::getDefaultForeground() {
+        return {255, 255, 255};
+    }
+
+    Color Color::getDefaultBackground() {
         return {0, 0, 0};
     }
 

@@ -10,6 +10,7 @@
 
 namespace terminal_fps::graphics {
     Pixel Pixel::getDefault() {
-        return {Color::getDefault(), u'\u2588'};
+        return {Color::getDefaultForeground(), Color::getDefaultBackground(),
+                u'\u2588'};
     }
 } // namespace terminal_fps::graphics
