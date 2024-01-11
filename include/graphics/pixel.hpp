@@ -7,6 +7,9 @@
 
 #pragma once
 
+//-- Standard Library
+#include <string>
+
 //-- Project Code
 #include "graphics/color.hpp"
 
@@ -36,5 +39,13 @@ namespace terminal_fps::graphics {
          * The symbol that represents the pixel.
          */
         char16_t symbol;
+
+        /**
+         * Convert this instance to an ANSI control sequence for outputting the
+         * instance.
+         *
+         * @returns An ANSI control sequence for outputting the instance.
+         */
+        std::string toANSISequence() const;
     };
 } // namespace terminal_fps::graphics
