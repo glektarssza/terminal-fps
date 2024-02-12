@@ -36,9 +36,9 @@ EXE_NAME_DEBUG ?= $(PROJECT_NAME)-debug
 EXE_NAME_TESTS ?= $(PROJECT_NAME)-tests
 
 ifeq ($(OS),Windows_NT)
-	EXE_NAME := $(addsuffix $(EXE_NAME),.exe)
-	EXE_NAME_DEBUG := $(addsuffix $(EXE_NAME_DEBUG),.exe)
-	EXE_NAME_TESTS := $(addsuffix $(EXE_NAME_TESTS),.exe)
+	EXE_NAME := $(addsuffix .exe,$(EXE_NAME))
+	EXE_NAME_DEBUG := $(addsuffix .exe,$(EXE_NAME_DEBUG))
+	EXE_NAME_TESTS := $(addsuffix .exe,$(EXE_NAME_TESTS))
 endif
 
 #-- make Configuration
