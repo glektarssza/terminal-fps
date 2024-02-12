@@ -1,0 +1,250 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "make:build-debug",
+            "detail": "Build the project in debug mode.",
+            "icon": {
+                "id": "combine",
+                "color": "terminal.ansiWhite"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "isBackground": false,
+            "type": "process",
+            "command": "make",
+            "args": [
+                "build-debug"
+            ],
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "mingw64.cmd",
+                        "args": [
+                            "-c"
+                        ]
+                    }
+                }
+            },
+            "runOptions": {
+                "instanceLimit": 1,
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "make:build-release",
+            "detail": "Build the project in release mode.",
+            "icon": {
+                "id": "combine",
+                "color": "terminal.ansiWhite"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "isBackground": false,
+            "type": "process",
+            "command": "make",
+            "args": [
+                "build-release"
+            ],
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "mingw64.cmd",
+                        "args": [
+                            "-c"
+                        ]
+                    }
+                }
+            },
+            "runOptions": {
+                "instanceLimit": 1,
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "make:clean",
+            "detail": "Clean the project.",
+            "icon": {
+                "id": "combine",
+                "color": "terminal.ansiWhite"
+            },
+            "group": "none",
+            "isBackground": false,
+            "type": "process",
+            "command": "make",
+            "args": [
+                "clean"
+            ],
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "mingw64.cmd",
+                        "args": [
+                            "-c"
+                        ]
+                    }
+                }
+            },
+            "runOptions": {
+                "instanceLimit": 1,
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "make:rebuild",
+            "detail": "Rebuild the project.",
+            "icon": {
+                "id": "combine",
+                "color": "terminal.ansiWhite"
+            },
+            "group": "none",
+            "isBackground": false,
+            "type": "process",
+            "command": "make",
+            "args": [
+                "rebuild"
+            ],
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "mingw64.cmd",
+                        "args": [
+                            "-c"
+                        ]
+                    }
+                }
+            },
+            "runOptions": {
+                "instanceLimit": 1,
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "make:test",
+            "detail": "Build the project in debug mode.",
+            "icon": {
+                "id": "beaker",
+                "color": "terminal.ansiWhite"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "isBackground": false,
+            "type": "process",
+            "command": "make",
+            "args": [
+                "test"
+            ],
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "mingw64.cmd",
+                        "args": [
+                            "-c"
+                        ]
+                    }
+                }
+            },
+            "runOptions": {
+                "instanceLimit": 1,
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "make:lint",
+            "detail": "Build the project in debug mode.",
+            "icon": {
+                "id": "search-fuzzy",
+                "color": "terminal.ansiWhite"
+            },
+            "group": "none",
+            "isBackground": false,
+            "type": "process",
+            "command": "make",
+            "args": [
+                "lint"
+            ],
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "mingw64.cmd",
+                        "args": [
+                            "-c"
+                        ]
+                    }
+                }
+            },
+            "runOptions": {
+                "instanceLimit": 1,
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}
