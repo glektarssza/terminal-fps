@@ -2,10 +2,6 @@
     "recommendations": [
         "github.remotehub",
         "github.vscode-pull-request-github",
-        "github.vscode-github-actions",
-        "ms-vscode.cpptools",
-        "twxs.cmake",
-        "josetr.cmake-language-support-vscode",
-        "ms-vscode.cmake-tools"
+        "github.vscode-github-actions"
     ]
 }

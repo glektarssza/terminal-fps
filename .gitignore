@@ -33,7 +33,3 @@ tags
 
 # Logs #
 *.log*
-
-# Artifacts #
-## CMake ##
-build/
