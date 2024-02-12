@@ -78,10 +78,10 @@ all: all/pre $(BUILD_DIR)/$(EXE_NAME) $(BUILD_DIR)/$(EXE_NAME_DEBUG)
 	@echo "Built all targets"
 
 run: $(BUILD_DIR)/$(EXE_NAME)
-	@$(BUILD_DIR)$(EXE_NAME)
+	@$(BUILD_DIR)/$(EXE_NAME) $(RUN_ARGS)
 
 run/debug: $(BUILD_DIR)/$(EXE_NAME_DEBUG)
-	@$(BUILD_DIR)$(EXE_NAME_DEBUG)
+	@$(BUILD_DIR)/$(EXE_NAME_DEBUG) $(RUN_DEBUG_ARGS)
 
 clean: $(BUILD_DIR)
 	@echo "Cleaning..."
