@@ -3,7 +3,7 @@
     "collections": [
         {
             "name": "core",
-            "path": "/usr/local/Cellar/odin/2024-02/bin/core"
+            "path": "/usr/local/Cellar/odin/2024-02/libexec/core"
         }
     ],
     "enable_document_symbols": true,
