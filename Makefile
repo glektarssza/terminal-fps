@@ -60,8 +60,24 @@ ifeq ($(OS),Windows_NT)
 .PHONY: all
 all: $(DIST_DIR)$(EXE_NAME).exe $(DIST_DIR)$(EXE_NAME_DEBUG).exe
 	@echo "Building all targets..."
+
+.PHONY: run
+run: $(DIST_DIR)$(EXE_NAME)
+	@$(DIST_DIR)$(EXE_NAME).exe
+
+.PHONY: debug
+debug: $(DIST_DIR)$(EXE_NAME_DEBUG)
+	@$(DIST_DIR)$(EXE_NAME_DEBUG).exe
 else
 .PHONY: all
 all: $(DIST_DIR)$(EXE_NAME) $(DIST_DIR)$(EXE_NAME_DEBUG)
 	@echo "Building all targets..."
+
+.PHONY: run
+run: $(DIST_DIR)$(EXE_NAME)
+	@$(DIST_DIR)$(EXE_NAME)
+
+.PHONY: debug
+debug: $(DIST_DIR)$(EXE_NAME_DEBUG)
+	@$(DIST_DIR)$(EXE_NAME_DEBUG)
 endif
