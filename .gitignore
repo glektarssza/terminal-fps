@@ -33,3 +33,10 @@ tags
 
 # Logs #
 *.log*
+
+# Artifacts #
+## Intermediates ##
+build/
+
+## Built Files ##
+dist/
