@@ -8,7 +8,6 @@ SOURCE_FILES := main.odin
 SOURCE_DIR := ./src/
 BUILD_DIR := ./build/
 DIST_DIR := ./dist/
-INSTALL_DIR ?= $(DIST_DIR)
 DOC_DIR := ./docs/
 
 #-- Tool Variables
@@ -26,58 +25,50 @@ SOURCES := $(SOURCE_FILES:%=$(SOURCE_DIR)%)
 EXE_NAME ?= $(PROJECT_NAME)
 EXE_NAME_DEBUG ?= $(PROJECT_NAME)-debug
 
+ifeq ($(OS),Windows_NT)
+	EXE_NAME := $(addsuffix $(EXE_NAME),.exe)
+	EXE_NAME := $(addsuffix $(EXE_NAME_DEBUG),.exe)
+endif
+
 #-- Build Rules
 
-$(DIST_DIR)$(EXE_NAME): $(SOURCES) | $(BUILD_DIR) $(DIST_DIR)
+$(BUILD_DIR)$(EXE_NAME): $(SOURCES) | $(BUILD_DIR)
+	@echo "Building \"$@\""
 	$(ODIN_COMPILER) build $(SOURCE_DIR) -out:$@ $(ODIN_DEFINES) $(ODIN_FLAGS) \
 		$(ODIN_RELEASE_FLAGS)
 
-$(DIST_DIR)$(EXE_NAME_DEBUG): $(SOURCES) | $(BUILD_DIR) $(DIST_DIR)
+$(BUILD_DIR)$(EXE_NAME_DEBUG): $(SOURCES) | $(BUILD_DIR)
+	@echo "Building \"$@\""
 	$(ODIN_COMPILER) build $(SOURCE_DIR) -out:$@ $(ODIN_DEFINES) $(ODIN_FLAGS) \
 		$(ODIN_DEUBG_FLAGS)
 
-#-- Windows Build Rules
+$(BUILD_DIR):
+	@mkdir -p $(BUILD_DIR)
 
-$(DIST_DIR)$(EXE_NAME).exe: $(SOURCES) | $(BUILD_DIR) $(DIST_DIR)
-	$(ODIN_COMPILER) build $(SOURCE_DIR) -out:$@ $(ODIN_DEFINES) $(ODIN_FLAGS) \
-		$(ODIN_RELEASE_FLAGS)
+.PHONY: print-env pre-all all clean run debug rebuild
 
-$(DIST_DIR)$(EXE_NAME_DEBUG).exe: $(SOURCES) | $(BUILD_DIR) $(DIST_DIR)
-	$(ODIN_COMPILER) build $(SOURCE_DIR) -out:$@ $(ODIN_DEFINES) $(ODIN_FLAGS) \
-		$(ODIN_DEUBG_FLAGS)
-
-#-- Directory Creation Rules
-$(DIST_DIR) $(BUILD_DIR):
-	@mkdir -p "$@"
-
-.PHONY: print-env
 print-env:
 	@echo "=== Environment Information ==="
 	@echo "Odin: $(shell odin version)"
 	@odin report
 
-ifeq ($(OS),Windows_NT)
-.PHONY: all
-all: $(DIST_DIR)$(EXE_NAME).exe $(DIST_DIR)$(EXE_NAME_DEBUG).exe
+pre-all:
 	@echo "Building all targets..."
 
-.PHONY: run
-run: $(DIST_DIR)$(EXE_NAME)
-	@$(DIST_DIR)$(EXE_NAME).exe
+all: pre-all $(BUILD_DIR)$(EXE_NAME) $(BUILD_DIR)$(EXE_NAME_DEBUG)
+	@echo "Built all targets"
 
-.PHONY: debug
-debug: $(DIST_DIR)$(EXE_NAME_DEBUG)
-	@$(DIST_DIR)$(EXE_NAME_DEBUG).exe
-else
-.PHONY: all
-all: $(DIST_DIR)$(EXE_NAME) $(DIST_DIR)$(EXE_NAME_DEBUG)
-	@echo "Building all targets..."
+run: $(BUILD_DIR)$(EXE_NAME)
+	@$(BUILD_DIR)$(EXE_NAME)
 
-.PHONY: run
-run: $(DIST_DIR)$(EXE_NAME)
-	@$(DIST_DIR)$(EXE_NAME)
+debug: $(BUILD_DIR)$(EXE_NAME_DEBUG)
+	@$(BUILD_DIR)$(EXE_NAME_DEBUG)
 
-.PHONY: debug
-debug: $(DIST_DIR)$(EXE_NAME_DEBUG)
-	@$(DIST_DIR)$(EXE_NAME_DEBUG)
-endif
+clean: $(BUILD_DIR)
+	@echo "Cleaning..."
+	@rm -r $(BUILD_DIR)
+	@echo "Done cleaning"
+
+rebuild:
+	@$(MAKE) clean
+	@$(MAKE) all
