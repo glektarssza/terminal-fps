@@ -8,12 +8,13 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug (LLDB)",
-            "program": "${workspaceFolder}/build/terminal-fps-debug",
+            "program": "${workspaceFolder}/dist/terminal-fps-debug",
             "windows": {
-                "program": "${workspaceFolder}/build/terminal-fps-debug.exe"
+                "program": "${workspaceFolder}/dist/terminal-fps-debug.exe"
             },
             "args": [],
-            "cwd": "${workspaceFolder}"
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "make:build-debug"
         }
     ]
 }
