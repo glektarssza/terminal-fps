@@ -111,9 +111,9 @@ rebuild:
 
 test: | $(OUT_DIR)
 	@echo "Running tests..."
-	$(ODIN_COMPILER) test $(SOURCE_DIR) -out:$@ $(ODIN_TEST_FLAGS)
+	$(ODIN_COMPILER) test $(SOURCE_DIR) -out:$(EXE_NAME_TESTS) $(ODIN_TEST_FLAGS)
 	@echo "Cleaning up..."
-	@rm "$@"
+	@rm "$(EXE_NAME_TESTS)"
 	@echo "Done running tests"
 
 lint:
