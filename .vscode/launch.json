@@ -13,9 +13,7 @@
                 "program": "${workspaceFolder}/build/terminal-fps-debug.exe"
             },
             "args": [],
-            "cwd": "${workspaceFolder}",
-            "stopOnEntry": true,
-            "preLaunchTask": ""
+            "cwd": "${workspaceFolder}"
         }
     ]
 }
