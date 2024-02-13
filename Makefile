@@ -1,122 +1,144 @@
-#-- Project Variables
+#-- Project Settings
 PROJECT_NAME := terminal-fps
 PROJECT_DESCRIPTION := A simple first-person shooter that runs in your terminal.
 PROJECT_VERSION := 0.0.0
-SOURCE_FILES := main.odin
+SOURCE_DIR := ./src/
+ENTRY_POINT := main.odin
+BUILD_DIR := ./build/
 
-#-- Path Variables
-SOURCE_DIR := src
-OUT_DIR ?= dist
-DOC_DIR := docs
+#-- Target Configuration
+EXE_NAME := $(PROJECT_NAME)
+EXE_NAME_DEBUG := $(EXE_NAME)-debug
+EXE_NAME_TESTS := $(EXE_NAME)-tests
 
-#-- Tool Variables
+#-- Tool Configuration
 ODIN_COMPILER ?= odin
-FLAGS ?= -build-mode:exe
-DEBUG_FLAGS ?= -debug -o:none
-RELEASE_FLAGS ?= -o:minimal -obfuscate-source-code-locations
-TEST_FLAGS ?=
-CHECK_FLAGS ?= -strict-style -vet-unused -vet-shadowing -vet-using-stmt \
-				-vet-using-param -vet-style -vet-semicolon
-DEFINES ?= -define:PROJECT_NAME="$(PROJECT_NAME)"				 \
-			-define:PROJECT_DESCRIPTION="$(PROJECT_DESCRIPTION)" \
-			-define:PROJECT_VERSION="$(PROJECT_VERSION)"
+ODIN_BUILD_FLAGS ?= -build-mode:exe
+ODIN_BUILD_RELEASE_FLAGS ?= -o:minimal
+ODIN_BUILD_DEBUG_FLAGS ?= -o:none -debug
+ODIN_CHECK_FLAGS ?= -strict-style -vet-unused -vet-shadowing -vet-using-stmt	\
+					-vet-using-param -vet-style -vet-semicolon
+ODIN_TEST_FLAGS ?= -o:none -debug
+ODIN_DEFINES += -define:PROJECT_NAME="$(PROJECT_NAME)"							\
+				-define:PROJECT_VERSION="$(PROJECT_VERSION)"					\
+				-define:PROJECT_DESCRIPTION="$(PROJECT_DESCRIPTION)"
 
-#-- Generated Variables
-SOURCES := $(SOURCE_FILES:%=$(SOURCE_DIR)/%)
-
-ODIN_BASE_FLAGS ?= $(CHECK_FLAGS) $(ODIN_DEFINES)
-ODIN_DEBUG_FLAGS ?= $(ODIN_BASE_FLAGS) $(DEBUG_FLAGS)
-ODIN_RELEASE_FLAGS ?= $(ODIN_BASE_FLAGS) $(RELEASE_FLAGS)
-ODIN_TEST_FLAGS ?= $(ODIN_BASE_FLAGS) $(TEST_FLAGS)
-ODIN_CHECK_FLAGS ?= $(ODIN_BASE_FLAGS)
-
-EXE_NAME ?= $(PROJECT_NAME)
-EXE_NAME_DEBUG ?= $(PROJECT_NAME)-debug
-EXE_NAME_TESTS ?= $(PROJECT_NAME)-tests
-
+#-- Windows-specific
 ifeq ($(OS),Windows_NT)
+	ODIN_COMPILER := $(addsuffix .exe,$(ODIN_COMPILER))
 	EXE_NAME := $(addsuffix .exe,$(EXE_NAME))
 	EXE_NAME_DEBUG := $(addsuffix .exe,$(EXE_NAME_DEBUG))
 	EXE_NAME_TESTS := $(addsuffix .exe,$(EXE_NAME_TESTS))
 endif
 
-#-- GNU make Configuration
-.DEFAULT_GOAL := default
+#-- Path Sanitization
+SOURCE_DIR := $(abspath $(SOURCE_DIR))
+BUILD_DIR := $(abspath $(BUILD_DIR))
 
-#-- Build Rules
+#-- Output Goals
+$(BUILD_DIR)/$(EXE_NAME): $(SOURCE_DIR)/$(ENTRY_POINT) | $(BUILD_DIR)
+	@echo "Building $@"
+	$(ODIN_COMPILER) build $(SOURCE_DIR) -out:$@ $(ODIN_BASE_FLAGS)				\
+		$(ODIN_BUILD_FLAGS) $(ODIN_BUILD_RELEASE_FLAGS) $(ODIN_DEFINES)
 
-$(OUT_DIR)/$(EXE_NAME): $(SOURCES) | $(OUT_DIR)
-	@echo "Building \"$@\""
-	$(ODIN_COMPILER) build $(SOURCE_DIR) -out:$@ $(ODIN_RELEASE_FLAGS)
+$(BUILD_DIR)/$(EXE_NAME_DEBUG): $(SOURCE_DIR)/$(ENTRY_POINT) | $(BUILD_DIR)
+	@echo "Building $@"
+	$(ODIN_COMPILER) build $(SOURCE_DIR) -out:$@ $(ODIN_BASE_FLAGS)				\
+		$(ODIN_BUILD_FLAGS) $(ODIN_BUILD_DEBUG_FLAGS) $(ODIN_DEFINES)
 
-$(OUT_DIR)/$(EXE_NAME_DEBUG): $(SOURCES) | $(OUT_DIR)
-	@echo "Building \"$@\""
-	$(ODIN_COMPILER) build $(SOURCE_DIR) -out:$@ $(ODIN_DEBUG_FLAGS)
+#-- Directory Creation Goals
+$(BUILD_DIR):
+	@echo "Creating \"$(BUILD_DIR)\"..."
+	@mkdir -p $(BUILD_DIR)
 
-$(OUT_DIR):
-	@mkdir -p $(OUT_DIR)
-
-#-- Rule Aliases
-
-.PHONY: default print-env pre-all all pre-build build build-release \
-	build-debug run run-debug clean rebuild test lint
-
-default: build
-
+#-- Environment Debugging Goals
+.PHONY: print-env
 print-env:
-	@echo "=== Environment Information ==="
-	@echo "Odin: $(shell odin version)"
-	@odin report
+	@echo "=== Make Environment ==="
+	@echo "Odin Compiler: $(ODIN_COMPILER)"
+	@echo "Make: $(MAKE)"
+	@echo "Source Directory: $(SOURCE_DIR)"
+	@echo "Output Directory: $(BUILD_DIR)"
+	@echo "Release Output: $(EXE_NAME)"
+	@echo "Debug Output: $(EXE_NAME_DEBUG)"
+	@echo ""
+	@echo "=== Odin Environment ==="
+	@$(ODIN_COMPILER) report
 
-pre-all:
-	@echo "Building all targets..."
+#-- Aliased Goals
+.DEFAULT_GOAL: default
 
-all: pre-all build-release build-debug
-	@echo "Built all targets"
+.PHONY: pre-default
+pre-default:
+	@echo "Building default goal..."
 
-pre-build:
-	@echo "Building default target..."
+.PHONY: default
+default: pre-default build
+	@echo "Built default goal"
 
-build: pre-build build-release
-	@echo "Built default target"
+.PHONY: all
+all: build-all
 
+.PHONY: pre-build-all
+pre-build-all:
+	@echo "Building entire project..."
+
+.PHONY: build-all
+build-all: pre-build-all build-release build-debug
+	@echo "Built entire project"
+
+.PHONY: build
+build: build-release
+
+.PHONY: pre-build-release
 pre-build-release:
-	@echo "Building release target..."
+	@echo "Building release goal..."
 
-build-release: pre-build-release $(OUT_DIR)/$(EXE_NAME)
-	@echo "Built release target"
+.PHONY: build-release
+build-release: pre-build-release $(BUILD_DIR)/$(EXE_NAME)
+	@echo "Built release goal"
 
+.PHONY: pre-build-debug
 pre-build-debug:
-	@echo "Building debug target..."
+	@echo "Building debug goal"
 
-build-debug: pre-build-debug $(OUT_DIR)/$(EXE_NAME_DEBUG)
-	@echo "Built debug target"
+.PHONY: build-debug
+build-debug: pre-build-debug $(BUILD_DIR)/$(EXE_NAME_DEBUG)
+	@echo "Built debug goal"
 
-run: build-release
-	@echo "Running $(OUT_DIR)/$(EXE_NAME)..."
-	@$(OUT_DIR)/$(EXE_NAME) $(RUN_ARGS)
+.PHONY: pre-clean
+pre-clean:
+	@echo "Cleaning project..."
 
-run-debug: build-debug
-	@echo "Running $(OUT_DIR)/$(EXE_NAME_DEBUG)..."
-	@$(OUT_DIR)/$(EXE_NAME_DEBUG) $(RUN_DEBUG_ARGS)
+.PHONY: clean
+clean: pre-clean
+	rm -rf $(BUILD_DIR)
+	@echo "Cleaned project"
 
-clean: $(OUT_DIR)
-	@echo "Cleaning..."
-	@rm -r $(OUT_DIR)
-	@echo "Done cleaning"
+.PHONY: pre-rebuild
+pre-rebuild:
+	@echo "Rebuilding whole project..."
 
+.PHONY: rebuild
 rebuild:
-	@$(MAKE) clean
-	@$(MAKE) all
+	@$(MAKE) -f $(firstword $(MAKEFILE_LIST)) clean
+	@$(MAKE) -f $(firstword $(MAKEFILE_LIST)) build-all
 
-test: | $(OUT_DIR)
-	@echo "Running tests..."
-	$(ODIN_COMPILER) test $(SOURCE_DIR) -out:$(EXE_NAME_TESTS) $(ODIN_TEST_FLAGS)
-	@echo "Cleaning up..."
-	@rm "$(EXE_NAME_TESTS)"
-	@echo "Done running tests"
+.PHONY: pre-lint
+pre-lint:
+	@echo "Linting project..."
 
-lint:
-	@echo "Linting..."
+.PHONY: lint
+lint: pre-lint
 	$(ODIN_COMPILER) check $(SOURCE_DIR) $(ODIN_CHECK_FLAGS)
-	@echo "Done linting"
+	@echo "Linted project"
+
+.PHONY: pre-test
+pre-test:
+	@echo "Running project tests..."
+
+.PHONY: test
+test: pre-test clean | $(BUILD_DIR)
+	$(ODIN_COMPILER) test $(SOURCE_DIR) -out:$(BUILD_DIR)/$(EXE_NAME_TESTS)		\
+		$(ODIN_TEST_FLAGS) $(ODIN_DEFINES)
+	@echo "Ran project tests"
