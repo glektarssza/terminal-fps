@@ -3,7 +3,6 @@ PROJECT_NAME := terminal-fps
 PROJECT_DESCRIPTION := A simple first-person shooter that runs in your terminal.
 PROJECT_VERSION := 0.0.0
 SOURCE_DIR := ./src/
-ENTRY_POINT := main.odin
 BUILD_DIR := ./build/
 
 #-- Target Configuration
@@ -35,13 +34,16 @@ endif
 SOURCE_DIR := $(abspath $(SOURCE_DIR))
 BUILD_DIR := $(abspath $(BUILD_DIR))
 
+#-- Source File Detection
+SOURCE_FILES := $(wildcard $(SOURCE_DIR)/*.odin)
+
 #-- Output Goals
-$(BUILD_DIR)/$(EXE_NAME): $(SOURCE_DIR)/$(ENTRY_POINT) | $(BUILD_DIR)
+$(BUILD_DIR)/$(EXE_NAME): $(SOURCE_FILES) | $(BUILD_DIR)
 	@echo "Building $@"
 	$(ODIN_COMPILER) build $(SOURCE_DIR) -out:$@ $(ODIN_BASE_FLAGS)				\
 		$(ODIN_BUILD_FLAGS) $(ODIN_BUILD_RELEASE_FLAGS) $(ODIN_DEFINES)
 
-$(BUILD_DIR)/$(EXE_NAME_DEBUG): $(SOURCE_DIR)/$(ENTRY_POINT) | $(BUILD_DIR)
+$(BUILD_DIR)/$(EXE_NAME_DEBUG): $(SOURCE_FILES) | $(BUILD_DIR)
 	@echo "Building $@"
 	$(ODIN_COMPILER) build $(SOURCE_DIR) -out:$@ $(ODIN_BASE_FLAGS)				\
 		$(ODIN_BUILD_FLAGS) $(ODIN_BUILD_DEBUG_FLAGS) $(ODIN_DEFINES)
@@ -64,6 +66,11 @@ print-env:
 	@echo ""
 	@echo "=== Odin Environment ==="
 	@$(ODIN_COMPILER) report
+
+.PHONY: print-source-files
+print-source-files:
+	@echo "=== Source Files ==="
+	@echo "$(SOURCE_FILES)"
 
 #-- Aliased Goals
 .DEFAULT_GOAL: default
