@@ -3,6 +3,7 @@ PROJECT_NAME := terminal-fps
 PROJECT_DESCRIPTION := A simple first-person shooter that runs in your terminal.
 PROJECT_VERSION := 0.0.0
 SOURCE_DIR := ./src/
+TESTS_DIR := ./tests/
 BUILD_DIR := ./build/
 
 #-- Target Configuration
@@ -17,7 +18,7 @@ ODIN_BUILD_RELEASE_FLAGS ?= -o:minimal
 ODIN_BUILD_DEBUG_FLAGS ?= -o:none -debug
 ODIN_CHECK_FLAGS ?= -strict-style -vet-unused -vet-shadowing -vet-using-stmt	\
 					-vet-using-param -vet-style -vet-semicolon
-ODIN_TEST_FLAGS ?= -o:none -debug
+ODIN_TEST_FLAGS ?= -o:none -debug -collection:app=$(dir $(firstword $(MAKEFILE_LIST)))
 ODIN_DEFINES += -define:PROJECT_NAME="$(PROJECT_NAME)"							\
 				-define:PROJECT_VERSION="$(PROJECT_VERSION)"					\
 				-define:PROJECT_DESCRIPTION="$(PROJECT_DESCRIPTION)"
@@ -32,6 +33,7 @@ endif
 
 #-- Path Sanitization
 SOURCE_DIR := $(abspath $(SOURCE_DIR))
+TESTS_DIR := $(abspath $(TESTS_DIR))
 BUILD_DIR := $(abspath $(BUILD_DIR))
 
 #-- Source File Detection
@@ -146,7 +148,7 @@ pre-test:
 
 .PHONY: test
 test: pre-test clean | $(BUILD_DIR)
-	$(ODIN_COMPILER) test $(SOURCE_DIR) -out:$(BUILD_DIR)/$(EXE_NAME_TESTS)		\
+	$(ODIN_COMPILER) test $(TESTS_DIR) -out:$(BUILD_DIR)/$(EXE_NAME_TESTS)		\
 		$(ODIN_TEST_FLAGS) $(ODIN_DEFINES)
 	@echo "Ran project tests"
 
