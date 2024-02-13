@@ -15,20 +15,17 @@
                 "isDefault": true
             },
             "isBackground": false,
-            "type": "process",
+            "type": "shell",
             "command": "make",
             "args": [
                 "build-debug"
             ],
             "windows": {
-                "options": {
-                    "shell": {
-                        "executable": "mingw64.cmd",
-                        "args": [
-                            "-c"
-                        ]
-                    }
-                }
+                "command": "mingw.cmd",
+                "args": [
+                    "-c",
+                    "make build-debug"
+                ]
             },
             "runOptions": {
                 "instanceLimit": 1,
@@ -54,23 +51,20 @@
             },
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             },
             "isBackground": false,
-            "type": "process",
+            "type": "shell",
             "command": "make",
             "args": [
                 "build-release"
             ],
             "windows": {
-                "options": {
-                    "shell": {
-                        "executable": "mingw64.cmd",
-                        "args": [
-                            "-c"
-                        ]
-                    }
-                }
+                "command": "mingw.cmd",
+                "args": [
+                    "-c",
+                    "make build-release"
+                ]
             },
             "runOptions": {
                 "instanceLimit": 1,
@@ -96,20 +90,17 @@
             },
             "group": "none",
             "isBackground": false,
-            "type": "process",
+            "type": "shell",
             "command": "make",
             "args": [
                 "clean"
             ],
             "windows": {
-                "options": {
-                    "shell": {
-                        "executable": "mingw64.cmd",
-                        "args": [
-                            "-c"
-                        ]
-                    }
-                }
+                "command": "mingw.cmd",
+                "args": [
+                    "-c",
+                    "make clean"
+                ]
             },
             "runOptions": {
                 "instanceLimit": 1,
@@ -135,20 +126,17 @@
             },
             "group": "none",
             "isBackground": false,
-            "type": "process",
+            "type": "shell",
             "command": "make",
             "args": [
                 "rebuild"
             ],
             "windows": {
-                "options": {
-                    "shell": {
-                        "executable": "mingw64.cmd",
-                        "args": [
-                            "-c"
-                        ]
-                    }
-                }
+                "command": "mingw.cmd",
+                "args": [
+                    "-c",
+                    "make rebuild"
+                ]
             },
             "runOptions": {
                 "instanceLimit": 1,
@@ -183,14 +171,11 @@
                 "test"
             ],
             "windows": {
-                "options": {
-                    "shell": {
-                        "executable": "mingw64.cmd",
-                        "args": [
-                            "-c"
-                        ]
-                    }
-                }
+                "command": "mingw.cmd",
+                "args": [
+                    "-c",
+                    "make test"
+                ]
             },
             "runOptions": {
                 "instanceLimit": 1,
@@ -216,20 +201,17 @@
             },
             "group": "none",
             "isBackground": false,
-            "type": "process",
+            "type": "shell",
             "command": "make",
             "args": [
                 "lint"
             ],
             "windows": {
-                "options": {
-                    "shell": {
-                        "executable": "mingw64.cmd",
-                        "args": [
-                            "-c"
-                        ]
-                    }
-                }
+                "command": "mingw.cmd",
+                "args": [
+                    "-c",
+                    "make lint"
+                ]
             },
             "runOptions": {
                 "instanceLimit": 1,
