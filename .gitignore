@@ -34,6 +34,13 @@ tags
 # Logs #
 *.log*
 
+# Configs #
+## Odin Language Server ##
+ols.json
+
 # Artifacts #
-## CMake ##
+## Intermediates ##
 build/
+
+## Built Files ##
+dist/
