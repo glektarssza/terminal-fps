@@ -157,8 +157,12 @@ pre-run-release:
 
 .PHONY: run-release
 run-release: pre-run-release build-release
-	$(BUILD_DIR)/$(EXE_NAME)
-	@echo "Ran release executable"
+	@echo "=== Start Output ==="
+	@echo ""
+	@$(BUILD_DIR)/$(EXE_NAME)
+	@echo ""
+	@echo "=== End Output ==="
+	@echo "Ran debug executable"
 
 .PHONY: pre-run-debug
 pre-run-debug:
@@ -168,7 +172,7 @@ pre-run-debug:
 run-debug: pre-run-debug build-debug
 	@echo "=== Start Output ==="
 	@echo ""
-	$(BUILD_DIR)/$(EXE_NAME_DEBUG)
+	@$(BUILD_DIR)/$(EXE_NAME_DEBUG)
 	@echo ""
 	@echo "=== End Output ==="
 	@echo "Ran debug executable"
