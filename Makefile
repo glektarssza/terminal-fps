@@ -100,7 +100,7 @@ build-release: pre-build-release $(BUILD_DIR)/$(EXE_NAME)
 
 .PHONY: pre-build-debug
 pre-build-debug:
-	@echo "Building debug goal"
+	@echo "Building debug goal..."
 
 .PHONY: build-debug
 build-debug: pre-build-debug $(BUILD_DIR)/$(EXE_NAME_DEBUG)
@@ -142,3 +142,33 @@ test: pre-test clean | $(BUILD_DIR)
 	$(ODIN_COMPILER) test $(SOURCE_DIR) -out:$(BUILD_DIR)/$(EXE_NAME_TESTS)		\
 		$(ODIN_TEST_FLAGS) $(ODIN_DEFINES)
 	@echo "Ran project tests"
+
+.PHONY: pre-run
+pre-run:
+	@echo "Running project..."
+
+.PHONY: run
+run: run-release
+	@echo "Ran project"
+
+.PHONY: pre-run-release
+pre-run-release:
+	@echo "Running release executable..."
+
+.PHONY: run-release
+run-release: pre-run-release build-release
+	$(BUILD_DIR)/$(EXE_NAME)
+	@echo "Ran release executable"
+
+.PHONY: pre-run-debug
+pre-run-debug:
+	@echo "Running debug executable..."
+
+.PHONY: run-debug
+run-debug: pre-run-debug build-debug
+	@echo "=== Start Output ==="
+	@echo ""
+	$(BUILD_DIR)/$(EXE_NAME_DEBUG)
+	@echo ""
+	@echo "=== End Output ==="
+	@echo "Ran debug executable"
