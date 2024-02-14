@@ -1,0 +1,32 @@
+{
+    "name": "@glektarssza/setup-odin",
+    "description": "A GitHub action for setting up the Odin language.",
+    "version": "0.0.0",
+    "license": "SEE LICENSE IN LICENSE.md",
+    "private": true,
+    "author": {
+        "name": "G'lek Tarssza",
+        "email": "glek@glektarssza.com",
+        "url": "https://glektarssza.com"
+    },
+    "homepage": "https://github.com/glektarssza/terminal-fps",
+    "bugs": {
+        "url": "https://github.com/glektarssza/terminal-fps/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/glektarssza/terminal-fps.git",
+        "directory": "./.github/actions/setup-odin/"
+    },
+    "scripts": {
+        "build": "tsc --project ./src/ --outDir ./lib/"
+    },
+    "dependencies": {
+        "@actions/core": "^1.10.1",
+        "@actions/github": "^6.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.17",
+        "typescript": "^5.3.3"
+    }
+}
