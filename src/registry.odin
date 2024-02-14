@@ -52,11 +52,18 @@ Registry_Error :: struct {
 	allocator_error_code: Maybe(runtime.Allocator_Error),
 }
 
+/*
+Create a `Registry_Error` from just a `Registry_Error_Code`.
+*/
 @(private = "file")
 create_registry_error_from_code :: proc(code: Registry_Error_Code) -> Registry_Error {
 	return Registry_Error{code = code, allocator_error_code = nil}
 }
 
+/*
+Create a `Registry_Error` from a `Registry_Error_Code` and a
+`runtime.Allocator_Error`.
+*/
 @(private = "file")
 create_registry_error_from_allocator_error :: proc(
 	code: Registry_Error_Code,
@@ -65,6 +72,9 @@ create_registry_error_from_allocator_error :: proc(
 	return Registry_Error{code, allocator_error_code}
 }
 
+/*
+Create a `Registry_Error`.
+*/
 @(private = "file")
 create_registry_error :: proc {
 	create_registry_error_from_code,
