@@ -135,11 +135,16 @@ create_registry_id_from_string :: proc(
 }
 
 /*
-Create a new `Registry_ID`.
+Map a `Registry_ID` to a `string`.
 */
-create_registry_id :: proc {
-	create_registry_id_default,
-	create_registry_id_from_string,
+registry_id_to_string :: proc(id: Registry_ID) -> (result: string, error: Registry_Error) {
+	r, err := strings.concatenate({id.namespace, ":", id.location})
+	if err != runtime.Allocator_Error.None {
+		error = create_registry_error(Registry_Error_Code.Allocator_Error, err)
+		return
+	}
+	result = r
+	return
 }
 
 /*
