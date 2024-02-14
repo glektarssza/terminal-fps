@@ -204,3 +204,30 @@ registry_insert :: proc(registry: ^Registry($T), id: Registry_ID, value: T) -> R
 	return create_registry_error(Registry_Error_Code.No_Error)
 }
 
+/*
+Get a value from a `Registry` with the given `Registry_ID`.
+*/
+registry_get :: proc(
+	registry: ^Registry($T),
+	id: Registry_ID,
+) -> (
+	result: T,
+	error: Registry_Error,
+) {
+	if registry == nil {
+		error = create_registry_error(Registry_Error_Code.Invalid_Registry)
+		return
+	}
+	key, err := registry_id_to_string(id)
+	if err.code != Registry_Error_Code.No_Error {
+		error = err
+		return
+	}
+	if key not_in registry.data {
+		error = create_registry_error(Registry_Error_Code.Registry_ID_Not_Found)
+		return
+	}
+	result = registry.data[key]
+	return
+}
+
