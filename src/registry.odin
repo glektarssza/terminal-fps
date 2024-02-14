@@ -8,13 +8,32 @@ An enumeration of known errors that can come from registry-related operations.
 */
 Registry_Error_Code :: enum u8 {
 	// A value indicating there has been no errors.
-	No_Error            = 0,
+	No_Error                  = 0,
 
 	// A value indicating an error occurred inside an `Allocator`.
-	Allocator_Error     = 1,
+	Allocator_Error           = 1,
 
-	// A value indicating a value was not a valid `Registry_ID`.
-	Invalid_Registry_ID = 2,
+	/*
+    A value indicating the given value was not a valid `Registry_ID`.
+    */
+	Invalid_Registry_ID       = 2,
+
+	/*
+    A value indicating the given `Registry` was not valid.
+    */
+	Invalid_Registry          = 3,
+
+	/*
+    A value indicating the given `Registry_ID` was not found in the given
+    `Registry`.
+    */
+	Registry_ID_Not_Found     = 4,
+
+	/*
+    A value indicating the given `Registry_ID` was already present in the given
+    `Registry`.
+    */
+	Registry_ID_Already_Taken = 5,
 }
 
 /*
