@@ -186,3 +186,21 @@ create_registry :: proc($T: typeid) -> (result: ^Registry(T), error: Registry_Er
 	return
 }
 
+/*
+Insert a value into a `Registry` with the given `Registry_ID`.
+*/
+registry_insert :: proc(registry: ^Registry($T), id: Registry_ID, value: T) -> Registry_Error {
+	if registry == nil {
+		return create_registry_error(Registry_Error_Code.Invalid_Registry)
+	}
+	key, err := registry_id_to_string(id)
+	if err.code != Registry_Error_Code.No_Error {
+		return err
+	}
+	if key in registry.data {
+		return create_registry_error(Registry_Error_Code.Registry_ID_Already_Taken)
+	}
+	registry.data[key] = value
+	return create_registry_error(Registry_Error_Code.No_Error)
+}
+
