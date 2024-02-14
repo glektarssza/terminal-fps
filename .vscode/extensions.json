@@ -5,6 +5,8 @@
         "github.vscode-github-actions",
         "danielgavin.ols",
         "ms-vscode.makefile-tools",
-        "vadimcn.vscode-lldb"
+        "vadimcn.vscode-lldb",
+        "rvest.vs-code-prettier-eslint",
+        "dbaeumer.vscode-eslint"
     ]
 }
