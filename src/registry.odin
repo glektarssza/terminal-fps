@@ -231,3 +231,25 @@ registry_get :: proc(
 	return
 }
 
+/*
+Check whether a `Registry` has an item with the given `Registry_ID`.
+*/
+registry_has_id :: proc(
+	registry: ^Registry($T),
+	id: Registry_ID,
+) -> (
+	result: bool,
+	error: Registry_Error,
+) {
+	if registry == nil {
+		error = create_registry_error(Registry_Error_Code.Invalid_Registry)
+		return
+	}
+	key, err := registry_id_to_string(id)
+	if err.code != Registry_Error_Code.No_Error {
+		error = err
+		return
+	}
+	result = key in registry.data
+	return
+}

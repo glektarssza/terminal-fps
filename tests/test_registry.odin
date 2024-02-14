@@ -168,3 +168,47 @@ test_registry_get :: proc(t: ^testing.T) {
 	)
 	testing.expect_value(t, r, value)
 }
+
+@(test)
+test_registry_has_id :: proc(t: ^testing.T) {
+	//-- Given
+	namespace := "some_random_namespace"
+	location := "a_test/location"
+	registry_id := terminal_fps.Registry_ID{namespace, location}
+	registry, _ := terminal_fps.create_registry(Test_Struct)
+	value := Test_Struct {
+		id = 123,
+	}
+
+	//-- When
+	r, err := terminal_fps.registry_has_id(registry, registry_id)
+
+	//-- Then
+	testing.expect_value(
+		t,
+		err,
+		terminal_fps.Registry_Error {
+			code = terminal_fps.Registry_Error_Code.No_Error,
+			allocator_error_code = nil,
+		},
+	)
+	testing.expect_value(t, r, false)
+
+	//-- Given
+	_ = terminal_fps.registry_insert(registry, registry_id, value)
+
+	//-- When
+	r, err = terminal_fps.registry_has_id(registry, registry_id)
+
+	//-- Then
+	testing.expect_value(
+		t,
+		err,
+		terminal_fps.Registry_Error {
+			code = terminal_fps.Registry_Error_Code.No_Error,
+			allocator_error_code = nil,
+		},
+	)
+	testing.expect_value(t, r, true)
+
+}
