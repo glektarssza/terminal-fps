@@ -110,13 +110,6 @@ Registry_ID :: struct {
 }
 
 /*
-Create a new `Registry_ID` from the given namespace and location combination.
-*/
-create_registry_id_default :: proc(namespace: string, location: string) -> Registry_ID {
-	return Registry_ID{namespace, location}
-}
-
-/*
 Create a new `Registry_ID` from the given string.
 */
 create_registry_id_from_string :: proc(
@@ -134,7 +127,10 @@ create_registry_id_from_string :: proc(
 		error = create_registry_error(Registry_Error_Code.Invalid_Registry_ID)
 		return
 	}
-	result = create_registry_id_default(res[0], res[1])
+	result = Registry_ID {
+		namespace = res[0],
+		location  = res[1],
+	}
 	return
 }
 
