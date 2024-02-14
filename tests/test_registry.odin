@@ -65,4 +65,27 @@ test_registry_id_to_string :: proc(t: ^testing.T) {
 	testing.expect_value(t, r, "some_random_namespace:a_test/location")
 }
 
+Test_Struct :: struct {
+	id: u64,
+}
+
+@(test)
+test_create_registry :: proc(t: ^testing.T) {
+	//-- Given
+
+	//-- When
+	r, err := terminal_fps.create_registry(Test_Struct)
+
+	//-- Then
+	testing.expect_value(
+		t,
+		err,
+		terminal_fps.Registry_Error {
+			code = terminal_fps.Registry_Error_Code.No_Error,
+			allocator_error_code = nil,
+		},
+	)
+	testing.expect(t, r != nil)
+}
+
 }

@@ -172,3 +172,17 @@ Registry :: struct($T: typeid) {
 	data: map[string]T,
 }
 
+/*
+Create a new `Registry` that holds the given type of data.
+*/
+create_registry :: proc($T: typeid) -> (result: ^Registry(T), error: Registry_Error) {
+	r, err := new(Registry(T))
+	if r == nil {
+		error = create_registry_error(Registry_Error_Code.Allocator_Error, err)
+		return
+	}
+	r.data = make(map[string]T)
+	result = r
+	return
+}
+
