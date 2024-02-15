@@ -48,15 +48,9 @@ jobs:
         run: make test
   lint:
     name: Lint
-    runs-on: ${{matrix.build_os}}
+    runs-on: ubuntu-latest
     permissions:
       contents: read
-    strategy:
-      fail-fast: true
-      matrix:
-        build_os:
-          - ubuntu-latest
-          - windows-latest
     steps:
       - id: checkout-repository
         name: Checkout repository
