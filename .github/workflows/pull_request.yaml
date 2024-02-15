@@ -22,4 +22,7 @@ jobs:
         uses: actions/checkout@v4
       - id: setup-odin
         name: Setup Odin
-        uses: glektarssza/gh-action-setup-odin@feature/action
+        uses: glektarssza/gh-action-setup-odin@v1
+      - id: build
+        name: Build
+        run: make all
