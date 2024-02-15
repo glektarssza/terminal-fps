@@ -1,0 +1,25 @@
+name: Pull Request
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build
+    runs-on: ${{matrix.build_os}}
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: true
+      matrix:
+        build_os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+    steps:
+      - id: checkout-repository
+        name: Checkout repository
+        uses: actions/checkout@v4
+      - id: setup-odin
+        name: Setup Odin
+        uses: glektarssza/setup-odin@feature/action
