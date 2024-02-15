@@ -15,7 +15,6 @@ jobs:
         build_os:
           - ubuntu-latest
           - windows-latest
-          - macos-latest
     steps:
       - id: checkout-repository
         name: Checkout repository
