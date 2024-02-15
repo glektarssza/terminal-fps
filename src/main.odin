@@ -1,8 +1,6 @@
 package terminal_fps
 
-import "base:runtime"
 import "core:fmt"
-import "core:math/linalg"
 import "core:os"
 import "core:path/filepath"
 
@@ -32,7 +30,7 @@ main :: proc() {
 	}
 
 	fmt.println("We built a game map tile registry with...")
-	for k, v in registry.tile_types {
+	for _, v in registry.tile_types {
 		fmt.println(fmt.aprintf("\t%d: %s - %s", v.id, v.alias, v.name))
 	}
 

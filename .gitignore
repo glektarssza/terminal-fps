@@ -34,13 +34,17 @@ tags
 # Logs #
 *.log*
 
+# Packages #
+## NodeJS ##
+node_modules/
+
 # Configs #
 ## Odin Language Server ##
 ols.json
 
 # Artifacts #
-## Intermediates ##
+## Built Files ##
 build/
 
-## Built Files ##
-dist/
+## Built GitHub Action Files ##
+/.github/actions/*/lib/

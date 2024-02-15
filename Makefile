@@ -1,5 +1,5 @@
 #-- Project Settings
-PROJECT_NAME := terminal-fps
+PROJECT_NAME := Terminal FPS
 PROJECT_DESCRIPTION := A simple first-person shooter that runs in your terminal.
 PROJECT_VERSION := 0.0.0
 SOURCE_DIR := ./src/
@@ -7,7 +7,7 @@ TESTS_DIR := ./tests/
 BUILD_DIR := ./build/
 
 #-- Target Configuration
-EXE_NAME := $(PROJECT_NAME)
+EXE_NAME := terminal-fps
 EXE_NAME_DEBUG := $(EXE_NAME)-debug
 EXE_NAME_TESTS := $(EXE_NAME)-tests
 
@@ -58,21 +58,31 @@ $(BUILD_DIR):
 #-- Environment Debugging Goals
 .PHONY: print-env
 print-env:
+	@echo "=== Project Configuration ==="
+	@echo "Project Name: $(PROJECT_NAME)"
+	@echo "Project Description: $(PROJECT_DESCRIPTION)"
+	@echo "Project Version: $(PROJECT_VERSION)"
+	@echo "Source Directory: $(SOURCE_DIR)"
+	@echo "Tests Directory: $(TESTS_DIR)"
+	@echo "Output Directory: $(BUILD_DIR)"
+	@echo ""
 	@echo "=== Make Environment ==="
 	@echo "Odin Compiler: $(ODIN_COMPILER)"
 	@echo "Make: $(MAKE)"
-	@echo "Source Directory: $(SOURCE_DIR)"
-	@echo "Output Directory: $(BUILD_DIR)"
 	@echo "Release Output: $(EXE_NAME)"
 	@echo "Debug Output: $(EXE_NAME_DEBUG)"
+	@echo "Tests Output: $(EXE_NAME_TESTS)"
 	@echo ""
 	@echo "=== Odin Environment ==="
 	@$(ODIN_COMPILER) report
 
-.PHONY: print-source-files
-print-source-files:
+NULL :=
+SPACE := $(NULL) $(NULL)
+
+.PHONY: print-sources
+print-sources:
 	@echo "=== Source Files ==="
-	@echo "$(SOURCE_FILES)"
+	@echo "$(subst $(SPACE),\n,$(SOURCE_FILES))"
 
 #-- Aliased Goals
 .DEFAULT_GOAL: default
