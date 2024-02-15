@@ -25,3 +25,45 @@ jobs:
       - id: build
         name: Build
         run: make all
+  test:
+    name: Test
+    runs-on: ${{matrix.build_os}}
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: true
+      matrix:
+        build_os:
+          - ubuntu-latest
+          - windows-latest
+    steps:
+      - id: checkout-repository
+        name: Checkout repository
+        uses: actions/checkout@v4
+      - id: setup-odin
+        name: Setup Odin
+        uses: glektarssza/gh-action-setup-odin@v1
+      - id: test
+        name: Test
+        run: make test
+  lint:
+    name: Lint
+    runs-on: ${{matrix.build_os}}
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: true
+      matrix:
+        build_os:
+          - ubuntu-latest
+          - windows-latest
+    steps:
+      - id: checkout-repository
+        name: Checkout repository
+        uses: actions/checkout@v4
+      - id: setup-odin
+        name: Setup Odin
+        uses: glektarssza/gh-action-setup-odin@v1
+      - id: lint
+        name: Lint
+        run: make lint
