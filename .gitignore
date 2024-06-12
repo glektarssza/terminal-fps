@@ -40,3 +40,4 @@ tags
 # Artifacts #
 ## Rust ##
 target/
+dist/
