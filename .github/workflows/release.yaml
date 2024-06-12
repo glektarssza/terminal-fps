@@ -1,0 +1,44 @@
+name: Release
+on:
+  release:
+    types:
+      - published
+concurrency:
+  cancel-in-progress: false
+  group: release
+jobs:
+  test:
+    name: Test
+    permissions:
+      contents: read
+    uses: ./.github/workflows/test.yaml
+    secrets:
+      github-token: ${{secrets.GITHUB_TOKEN}}
+  build:
+    name: Build
+    permissions:
+      actions: write
+      contents: read
+    uses: ./.github/workflows/build.yaml
+    secrets:
+      github-token: ${{secrets.GITHUB_TOKEN}}
+    with:
+      build-config: release
+  publish:
+    name: Publish
+    # TODO: Enable once we fix the other TODO
+    if: false
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    needs:
+      - test
+      - build
+    steps:
+      - id: download-artifacts
+        name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{needs.build.outputs.artifact-name}}
+          path: dist
+      # TODO: Publish release artifacts
