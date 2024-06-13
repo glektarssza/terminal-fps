@@ -87,10 +87,10 @@ jobs:
           matcher: true
       - id: build
         name: Build
-        run: cargo build --locked --profile ${{inputs.build-configuration}} -Z unstable-options --artifact-dir dist/${{inputs.build-configuration}}
+        run: cargo build --locked --profile ${{matrix.build-configuration}} -Z unstable-options --artifact-dir dist/${{matrix.build-configuration}}
       - id: upload-artifacts
         name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: dist-${{inputs.build-configuration}}-${{inputs.build-os}}
-          path: dist/${{inputs.build-configuration}}
+          name: dist-${{matrix.build-configuration}}-${{matrix.build-os}}
+          path: dist/${{matrix.build-configuration}}
