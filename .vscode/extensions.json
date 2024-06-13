@@ -2,6 +2,9 @@
     "recommendations": [
         "github.remotehub",
         "github.vscode-pull-request-github",
-        "github.vscode-github-actions"
+        "github.vscode-github-actions",
+        "dustypomerleau.rust-syntax",
+        "rust-lang.rust-analyzer",
+        "jscearcy.rust-doc-viewer"
     ]
 }
