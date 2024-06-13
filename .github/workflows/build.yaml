@@ -47,7 +47,7 @@ jobs:
     name: Build
     permissions:
       contents: read
-    runs-on: ${{matrix.build-os}}
+    runs-on: ${{(matrix.build-os == 'windows' && 'windows-latest') || (matrix.build-os == 'linux' && 'ubuntu-latest') || (matrix.build-os == 'macos' && 'macos-latest') || ''}}
     strategy:
       fail-fast: true
       matrix:
