@@ -47,7 +47,7 @@ jobs:
     name: Build
     permissions:
       contents: read
-    runs-on: ${{inputs.build-os}}
+    runs-on: ${{matrix.build-os}}
     strategy:
       fail-fast: true
       matrix:
