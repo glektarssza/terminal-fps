@@ -160,5 +160,14 @@
             "./bench/"
         ]
     },
-    "tasks": {}
+    "tasks": {
+        "build": "deno compile --output=dist/terminal-fps ./src/main.ts",
+        "build:win": "deno compile --target=x86_64-pc-windows-msvc --output=dist/terminal-fps ./src/main.ts",
+        "build:linux": "deon task build:linux:x86_64",
+        "build:linux:x86_64": "deno compile --target=x86_64-unknown-linux-gnu --output=dist/terminal-fps ./src/main.ts",
+        "build:linux:aarch64": "deno compile --target=aarch64-unknown-linux-gnu --output=dist/terminal-fps ./src/main.ts",
+        "build:macos": "deno task build:macos:x86_64",
+        "build:macos:x86_64": "deno compile --target=x86_64-apple-darwin --output=dist/terminal-fps ./src/main.ts",
+        "build:macos:aarch64": "deno compile --target=aarch64-apple-darwin --output=dist/terminal-fps ./src/main.ts"
+    }
 }
