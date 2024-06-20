@@ -36,8 +36,3 @@ tags
 
 # Environment #
 .envrc
-
-# Artifacts #
-## Rust ##
-target/
-dist/
