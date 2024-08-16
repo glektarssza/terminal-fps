@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Lint
+on:
+  workflow_call:
+    secrets:
+      github-token:
+        required: true
+        description: |
+          The token to use when making authenticated GitHub API calls.
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout-repository
+        name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{secrets.github-token || secrets.GITHUB_TOKEN}}
+          lfs: true
+      - id: setup-odin
+        name: Setup Odin
+        uses: laytan/setup-odin@v2.4.1
+        with:
+          token: ${{secrets.github-token || secrets.GITHUB_TOKEN}}
+          release: latest
+      - id: lint
+        name: Lint
+        run: make lint
