@@ -1,8 +1,8 @@
 # Project Definitions
 ## General Settings
-PROJECT_NAME := Odincraft
+PROJECT_NAME := Terminal FPS
 PROJECT_VERSION := 0.0.0
-PROJECT_DESCRIPTION := A simple Minecraft clone written in Odin using OpenGL.
+PROJECT_DESCRIPTION := A simple first-person shooter game that runs in your terminal.
 
 ## Project Directories
 SOURCE_DIR := src
@@ -13,7 +13,7 @@ BUILD_DIR := build
 DIST_DIR := dist
 
 ## Target Settings
-TARGET_NAME_BASE := odincraft
+TARGET_NAME_BASE := terminal-fps
 TARGET_NAME_DEBUG := $(TARGET_NAME_BASE)-debug
 TARGET_NAME_RELEASE := $(TARGET_NAME_BASE)
 TARGET_NAME_TESTS := $(TARGET_NAME_BASE)-tests
