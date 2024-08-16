@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug",
+            "program": "${workspaceFolder}/build/terminal-fps-debug",
+            "windows": {
+                "program": "${workspaceFolder}/build/terminal-fps-debug.exe"
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "build:debug"
+        }
+    ]
+}

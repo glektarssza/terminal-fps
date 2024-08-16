@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Pull Request
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build
+    strategy:
+      fail-fast: true
+      matrix:
+        build-os:
+          - windows
+          - linux
+          - macos
+    uses: ./.github/workflows/build.yaml
+    secrets:
+      github-token: ${{secrets.GITHUB_TOKEN}}
+    with:
+      build-os: ${{matrix.build-os}}
+  test:
+    name: Test
+    strategy:
+      fail-fast: true
+      matrix:
+        build-os:
+          - windows
+          - linux
+          - macos
+    uses: ./.github/workflows/test.yaml
+    secrets:
+      github-token: ${{secrets.GITHUB_TOKEN}}
+    with:
+      build-os: ${{matrix.build-os}}
+  lint:
+    name: Lint
+    uses: ./.github/workflows/lint.yaml
+    secrets:
+      github-token: ${{secrets.GITHUB_TOKEN}}

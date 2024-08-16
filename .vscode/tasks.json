@@ -1,0 +1,245 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build:release",
+            "detail": "Build the project in release mode.",
+            "icon": {
+                "id": "tools",
+                "color": "terminal.ansiWhite"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": [],
+            "dependsOrder": "sequence",
+            "isBackground": false,
+            "promptOnClose": false,
+            "hide": false,
+            "type": "shell",
+            "command": "make",
+            "runOptions": {
+                "instanceLimit": 1,
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": [
+                {
+                    "applyTo": "allDocuments",
+                    "fileLocation": "autoDetect",
+                    "source": "odin",
+                    "severity": "error",
+                    "pattern": [
+                        {
+                            "regexp": "(.+)\\((\\d+):(\\d+)\\)\\s+.+:\\s+(.+)",
+                            "file": 1,
+                            "line": 2,
+                            "column": 3,
+                            "message": 4
+                        },
+                        {
+                            "regexp": "(Warning):\\s+(.+)",
+                            "severity": 1,
+                            "message": 2
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "label": "build:debug",
+            "detail": "Build the project in debug mode.",
+            "icon": {
+                "id": "tools",
+                "color": "terminal.ansiCyan"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "dependsOn": [],
+            "dependsOrder": "sequence",
+            "isBackground": false,
+            "promptOnClose": false,
+            "hide": false,
+            "type": "shell",
+            "command": "make debug",
+            "runOptions": {
+                "instanceLimit": 1,
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": [
+                {
+                    "applyTo": "allDocuments",
+                    "fileLocation": "autoDetect",
+                    "source": "odin",
+                    "severity": "error",
+                    "pattern": [
+                        {
+                            "regexp": "(.+)\\((\\d+):(\\d+)\\)\\s+.+:\\s+(.+)",
+                            "file": 1,
+                            "line": 2,
+                            "column": 3,
+                            "message": 4
+                        },
+                        {
+                            "regexp": "(Warning):\\s+(.+)",
+                            "severity": 1,
+                            "message": 2
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "label": "clean",
+            "detail": "Clean the project outputs.",
+            "icon": {
+                "id": "trashcan",
+                "color": "terminal.ansiWhite"
+            },
+            "group": {
+                "kind": "none",
+                "isDefault": false
+            },
+            "dependsOn": [],
+            "dependsOrder": "sequence",
+            "isBackground": false,
+            "promptOnClose": false,
+            "hide": false,
+            "type": "shell",
+            "command": "make clean",
+            "runOptions": {
+                "instanceLimit": 1,
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "lint",
+            "detail": "Lint the project.",
+            "icon": {
+                "id": "search-fuzzy",
+                "color": "terminal.ansiYellow"
+            },
+            "group": {
+                "kind": "none",
+                "isDefault": false
+            },
+            "dependsOn": [],
+            "dependsOrder": "sequence",
+            "isBackground": false,
+            "promptOnClose": false,
+            "hide": false,
+            "type": "shell",
+            "command": "make lint",
+            "runOptions": {
+                "instanceLimit": 1,
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "test",
+            "detail": "Test the project.",
+            "icon": {
+                "id": "beaker",
+                "color": "terminal.ansiRed"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "dependsOn": [],
+            "dependsOrder": "sequence",
+            "isBackground": false,
+            "promptOnClose": false,
+            "hide": false,
+            "type": "shell",
+            "command": "make test",
+            "runOptions": {
+                "instanceLimit": 1,
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "archive",
+            "detail": "Generate a project distributable archive.",
+            "icon": {
+                "id": "package",
+                "color": "terminal.ansiGreen"
+            },
+            "group": {
+                "kind": "none",
+                "isDefault": false
+            },
+            "dependsOn": [],
+            "dependsOrder": "sequence",
+            "isBackground": false,
+            "promptOnClose": false,
+            "hide": false,
+            "type": "shell",
+            "command": "make archive",
+            "runOptions": {
+                "instanceLimit": 1,
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": []
+        }
+    ]
+}

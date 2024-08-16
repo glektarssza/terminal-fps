@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Test
+on:
+  workflow_call:
+    secrets:
+      github-token:
+        required: true
+        description: |
+          The token to use when making authenticated GitHub API calls.
+    inputs:
+      build-os:
+        required: true
+        type: string
+        description: |
+          The operating system to build for.
+
+          Valid options are:
+
+           * `windows`
+           * `linux`
+           * `macos`
+jobs:
+  test:
+    name: Test
+    runs-on: ${{(inputs.build-os == 'windows' && 'windows-latest') || (inputs.build-os == 'linux' && 'ubuntu-latest') || (inputs.build-os == 'macos' && 'macos-latest') || ''}}
+    steps:
+      - id: checkout-repository
+        name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{secrets.github-token || secrets.GITHUB_TOKEN}}
+          lfs: true
+      - id: setup-odin
+        name: Setup Odin
+        uses: laytan/setup-odin@v2.4.1
+        with:
+          token: ${{secrets.github-token || secrets.GITHUB_TOKEN}}
+          release: latest
+      - id: test
+        name: Test
+        run: make test
