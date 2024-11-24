@@ -37,10 +37,6 @@ tags
 # Environment #
 .envrc
 
-# Odin Language Server #
+# Language Servers #
+## Odin ##
 ols.json
-
-# Artifacts #
-build/
-dist/
-*.zip
