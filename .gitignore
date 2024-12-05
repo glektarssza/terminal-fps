@@ -7,11 +7,11 @@
 !.vscode/extensions.json
 !.vscode/launch.json
 !.vscode/tasks.json
+!.vscode/*.code-snippets
 
 ## Vim ##
 ### Swap ###
 [._]*.s[a-v][a-z]
-!*.svg
 [._]*.sw[a-p]
 [._]*.s[a-rt-v][a-z]
 [._]*.ss[a-gi-z]
