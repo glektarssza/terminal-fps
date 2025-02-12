@@ -20,7 +20,7 @@ jobs:
           lfs: true
       - id: setup-odin
         name: Setup Odin
-        uses: laytan/setup-odin@v2.8.1
+        uses: laytan/setup-odin@v2.9.1
         with:
           token: ${{secrets.github-token || secrets.GITHUB_TOKEN}}
           release: latest
